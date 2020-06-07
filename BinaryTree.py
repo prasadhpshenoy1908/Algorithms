@@ -1,3 +1,13 @@
+###############################################
+#
+#Binary Tree
+#This covers following:
+#     Insertion
+#     Deletion
+#     Printing
+#     
+###############################################
+
 class binaryTree:
     def __init__(self,value):
         self.value = value
