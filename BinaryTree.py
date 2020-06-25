@@ -116,7 +116,7 @@ class bTreeOperations:
             self._Desc_printNode(_curNode.right)
             print (str(_curNode.value))
             self._Desc_printNode(_curNode.left)
-    #depth check operation.
+
 
 def main():
     obTOpt = bTreeOperations()
