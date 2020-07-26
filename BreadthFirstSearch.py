@@ -6,6 +6,7 @@
 #     Traversing bottom to top
 #     Zigzag traversal
 #     Height of tree
+#     steps between 2 elements
 #
 ###############################################
 from collections import deque
@@ -20,6 +21,7 @@ class bTreeOperation:
     ### Initialization
     def __init__(self):
         self.root = None
+        self.depth = 0
 
     ### Insertion
     def InsertNode(self,value):
@@ -153,19 +155,35 @@ class bTreeOperation:
 
         print ("Minimum height is : ",minHeigh)
 
+    #depth of specific element
+    def _getElementsDepth(self, sum, bstNode, Element):
+        if bstNode is None:
+            return -1
+        if bstNode.value == Element:
+            self.depth += 1
+            return self.depth
+        elif bstNode.value < Element:
+            self.depth += 1 
+            return (self._getElementsDepth(sum,bstNode.right,Element))
+        else:
+            self.depth += 1
+            return (self._getElementsDepth(sum,bstNode.left,Element))
+        return -1
+            
+
+    def getDistance(self, Element1, Element2):
+        self.depth = 0
+        depth1 = self._getElementsDepth(sum, self.root, Element1)
+        if depth1 == -1:
+            return ("Number not present")
+        self.depth = 0
+        depth2 = self._getElementsDepth(sum, self.root, Element2)
+        if depth2 == -1:
+            return ("Number not present")
+        return ("Distance is ",(depth1 - depth2) + 1)
 
 def main():
     bTreeOpt = bTreeOperation()
-    # bTreeOpt.InsertNode(10)
-    # bTreeOpt.InsertNode(3)
-    # bTreeOpt.InsertNode(2)
-    # bTreeOpt.InsertNode(6)
-    # bTreeOpt.InsertNode(5)
-    # bTreeOpt.InsertNode(7)
-    # bTreeOpt.InsertNode(4)
-    # bTreeOpt.InsertNode(12)
-    # bTreeOpt.InsertNode(11)
-    # bTreeOpt.InsertNode(13)
 
     bTreeOpt.InsertNode(10)
     bTreeOpt.InsertNode(4)
@@ -179,6 +197,8 @@ def main():
     bTreeOpt.InsertNode(13)
     bTreeOpt.InsertNode(12)
     bTreeOpt.InsertNode(11)
+    
+    print (bTreeOpt.getDistance(2,6))
 
     bTreeOpt.print_TopToBottom()
     bTreeOpt.print_BottomToTop()
